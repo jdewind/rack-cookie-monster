@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "lib/rack_cookie_monster.rb"
+    "lib/rack/cookie_monster.rb"
   ]
   s.homepage = %q{http://github.com/dewind/rack-cookie-monster}
   s.rdoc_options = ["--charset=UTF-8"]
