@@ -12,9 +12,11 @@ Gem::Specification.new do |s|
   s.date = %q{2009-12-10}
   s.description = %q{A rack middleware library that allows cookies to be passed through forms}
   s.email = %q{dewind@atomicobject.com}
-  s.executables = ["autospec", "cucumber", "htmldiff", "ldiff", "rackup", "rails", "rake", "spec", "tt"]
   s.extra_rdoc_files = [
     "README.rdoc"
+  ]
+  s.files = [
+    "lib/rack_cookie_monster.rb"
   ]
   s.homepage = %q{http://github.com/dewind/rack-cookie-monster}
   s.rdoc_options = ["--charset=UTF-8"]
