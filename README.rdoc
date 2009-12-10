@@ -4,7 +4,7 @@ A rack middleware library that allows for cookies to be passed through forms.
 
 = Usage
 
-Example:
+Rails Example:
   Rack::CookieMonster.configure do |c|
     c.eat :_session_id
     c.eat :user_credentials
@@ -12,7 +12,19 @@ Example:
     c.share_with "Burt"
   end
 
-  ActionController::Dispatcher.middleware.insert_before(
-    ActionController::Base.session_store, 
-    CookieMonster
-  )
+  Rack::CookieMonster.configure_for_rails
+
+Rack Example:
+  class CookieMonsterApplication
+    def call(env)
+     ## body ##
+    end
+  end
+
+  Rack::CookieMonster.configure do |c|
+    c.eat :cookie_1
+    c.eat :cookie_2
+  end
+
+  use Rack::CookieMonster
+  run CookieMonsterApplication.new
