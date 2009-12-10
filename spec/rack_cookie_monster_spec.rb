@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'rack_cookie_monster'
-require 'picnic'
+require 'action_controller'
 
 describe Rack::CookieMonster do  
   subject { Class.new(described_class) }
@@ -16,6 +16,14 @@ describe Rack::CookieMonster do
       subject.cookies.should == [:_session_id, :user_credentials]
     end
     
+    it "turns the cookie keys into symbols" do
+      subject.configure do |c|
+        c.eat "burt"
+      end
+      
+      subject.cookies.should == [:burt]      
+    end
+    
     it "specifies what user agents can snack" do
       subject.configure do |c|
         c.share_with "MSIE 6.0"
@@ -23,6 +31,21 @@ describe Rack::CookieMonster do
       end
       
       subject.snackers.should == ["MSIE 6.0", /safari \d+/]
+    end
+    
+    it "raises an error if it is not configured" do
+      lambda { subject.cookies }.should raise_error(Rack::CookieMonster::Hungry, /not been configured/i)
+      lambda { subject.snackers }.should raise_error(Rack::CookieMonster::Hungry, /not been configured/i)
+      lambda { subject.configure_for_rails }.should raise_error(Rack::CookieMonster::Hungry, /not been configured/i)
+    end
+  end
+  
+  describe ".configure_for_rails" do
+    it "injects itself into the rails request stack" do
+      subject.configure {}
+      subject.configure_for_rails
+      ActionController::Dispatcher.middleware[2].should == subject
+      ActionController::Dispatcher.middleware[3].should == ActionController::Session::CookieStore
     end
   end
   

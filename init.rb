@@ -1,0 +1,1 @@
+require 'lib/rack_cookie_monster'
