@@ -1,0 +1,21 @@
+h2. What is this?
+
+A rack middleware library that allows for cookies to be passed through forms.
+
+h2. Usage
+
+Example:
+<pre>
+  CookieMonster.configure do |c|
+    c.eat :_session_id
+    c.eat :user_credentials
+    c.share_with /^(Adobe|Shockwave) Flash/
+    c.share_with "Burt"
+  end
+
+  ActionController::Dispatcher.middleware.insert_before(
+    ActionController::Base.session_store, 
+    CookieMonster
+  )
+</pre>
+
