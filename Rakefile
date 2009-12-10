@@ -27,7 +27,8 @@ begin
     s.email = "dewind@atomicobject.com"
     s.homepage = "http://github.com/dewind/rack-cookie-monster"
     s.authors = ["Justin DeWind"]
-    s.files =  FileList["lib"]
+    s.executables = nil
+    s.files =  FileList["lib/**/*.rb"]
     s.test_files = FileList["spec/**/*.rb"]
   end
   
