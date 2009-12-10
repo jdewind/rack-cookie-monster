@@ -7,7 +7,7 @@ class Picnic
   end
   
   def eat(cookie)
-    @cookies << cookie
+    @cookies << cookie.to_sym
   end
   
   def share_with(snacker)

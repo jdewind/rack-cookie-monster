@@ -5,7 +5,7 @@ A rack middleware library that allows for cookies to be passed through forms.
 = Usage
 
 Example:
-  CookieMonster.configure do |c|
+  Rack::CookieMonster.configure do |c|
     c.eat :_session_id
     c.eat :user_credentials
     c.share_with /^(Adobe|Shockwave) Flash/

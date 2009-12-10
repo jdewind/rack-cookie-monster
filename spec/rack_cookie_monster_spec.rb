@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'cookie_monster'
+require 'rack_cookie_monster'
 require 'picnic'
 
-describe CookieMonster do  
-  subject { Class.new(CookieMonster) }
+describe Rack::CookieMonster do  
+  subject { Class.new(described_class) }
   
   describe ".configure" do
     
@@ -43,8 +43,18 @@ describe CookieMonster do
     
     it "builds cookie string from environment params" do
       @app.expects(:call).with do |env|
-        env["HTTP_COOKIE"].should == "oatmeal_cookie=delicious; chocolate_cookie=yummy"
+        env["HTTP_COOKIE"].should == "chocolate_cookie=yummy; oatmeal_cookie=delicious"
         env["HTTP_COOKIE"].should be_frozen
+      end
+      
+      @target.call(@environment)
+    end
+    
+    it "will play nice with existing cookies" do
+      @environment["HTTP_COOKIE"] = "oatmeal_cookie=gross; peanutbutter_cookie=good"
+      
+      @app.expects(:call).with do |env|
+        env["HTTP_COOKIE"].should == "peanutbutter_cookie=good; chocolate_cookie=yummy; oatmeal_cookie=gross"        
       end
       
       @target.call(@environment)
