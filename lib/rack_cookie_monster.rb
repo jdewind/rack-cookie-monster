@@ -44,8 +44,8 @@ module Rack
       shares_with(env["HTTP_USER_AGENT"]) do
         request = ::Rack::Request.new(env)
         env["HTTP_COOKIE"] = build_cookie_string(request)
-        @app.call(env)      
       end
+      @app.call(env)
     end
 
     private

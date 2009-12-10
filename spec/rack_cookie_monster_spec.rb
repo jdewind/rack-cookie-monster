@@ -99,28 +99,31 @@ describe Rack::CookieMonster do
           c.share_with /^(Adobe|Shockwave) Flash/
           c.share_with "MSIE 6.0"
         end        
+        @cookies = "chocolate_cookie=yummy; oatmeal_cookie=delicious"
       end
       
       it "will match against regular expressions" do
-        @app.expects(:call).twice
         
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", @cookies)).twice
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", "")).once
+                
         @environment["HTTP_USER_AGENT"] = "Shockwave Flash"
-        @target.call(@environment)
+        @target.call(@environment.dup)
         @environment["HTTP_USER_AGENT"] = "Adobe Flash"
-        @target.call(@environment)
+        @target.call(@environment.dup)
         @environment["HTTP_USER_AGENT"] = "Flash"
-        @target.call(@environment)
+        @target.call(@environment.dup)
       end
       
       it "will exact match against strings" do
-        @app.expects(:call).once
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", @cookies)).once
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", "")).once
         
         @environment["HTTP_USER_AGENT"] = "MSIE 6.0"
-        @target.call(@environment)
+        @target.call(@environment.dup)
         @environment["HTTP_USER_AGENT"] = "MSIE"
-        @target.call(@environment)
-      end
-      
+        @target.call(@environment.dup)
+      end      
     end
   end
 end
