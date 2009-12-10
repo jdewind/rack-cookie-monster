@@ -17,7 +17,29 @@ Rails Example:
 Rack Example:
   class CookieMonsterApplication
     def call(env)
-     ## body ##
+      cookies = ::Rack::Request.new(env).cookies
+      res = ::Rack::Response.new
+      res.write %{
+        <html>
+          <head>
+            <title>Form</title>
+          </head>
+          <body>
+            <form action="/" method="post">
+              Cookie 1: <input type="text" name="cookie_1" />
+              Cookie 2: <input type="text" name="cookie_2" />
+              Non Cookie: <input type="text" name="non_cookie" />
+              <input type="submit" />
+            </form>
+          </body>
+          #{
+            cookies.map do |k,v|
+              "<p>#{k} - #{v}</p>"
+            end.join("\n")
+          }
+        </html>
+      }
+      res.finish
     end
   end
 
