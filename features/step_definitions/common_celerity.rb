@@ -160,12 +160,6 @@ def assert_successful_response(allow_bad_response=false)
   end
 end
 
-def read_email(number=0)
-  mail_file = File.join(MAILS_DIR, "mail.#{number}.txt")
-  File.should be_exist(mail_file)  
-  TMail::Mail.parse(File.read(mail_file))
-end
-
 def fill_in_textfield(field, value)
   $browser.text_field(:id, find_label(field).for).set(value)
 end
