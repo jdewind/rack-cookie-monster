@@ -3,10 +3,9 @@
 A rack middleware library that allows for cookies to be passed through forms.
 
 = Contributing
-  The environment can be configured by using bundler.
-  <pre>
+The environment can be configured by using bundler.
+
   gem bundle
-  </pre>
   
 = Usage
 
