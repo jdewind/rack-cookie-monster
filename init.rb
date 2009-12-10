@@ -1,1 +1,1 @@
-require File.join(File.dirname(__FILE__), 'lib/rack_cookie_monster')
+require File.join(File.dirname(__FILE__), 'lib/rack/cookie_monster')

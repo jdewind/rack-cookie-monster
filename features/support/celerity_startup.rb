@@ -45,7 +45,7 @@ if host_listening_on_port? "localhost", $port
   kill_test_server
 end
 
-%x(bin/rackup --require lib/rack_cookie_monster --require vendor/gems/environment --daemon --pid #{SERVER_PID} --server webrick features/monster.ru)
+%x(bin/rackup --require lib/rack/cookie_monster --require vendor/gems/environment --daemon --pid #{SERVER_PID} --server webrick features/monster.ru)
 raise "Couldn't start server" unless host_listening_on_port? "localhost", $port, 10
 
 $server ||= Culerity::run_server

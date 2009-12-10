@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'rack_cookie_monster'
+require 'rack/cookie_monster'
 require 'action_controller'
 
 describe Rack::CookieMonster do  
