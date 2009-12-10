@@ -1,4 +1,6 @@
 require 'spec/rake/spectask'
+require 'cucumber/rake/task'
+
 task :default => [:spec, :features]
 
 Spec::Rake::SpecTask.new do |t|
