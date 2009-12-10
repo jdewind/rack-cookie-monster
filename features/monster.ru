@@ -8,6 +8,7 @@ class CookieMonsterApplication
           <title>Form</title>
         </head>
         <body>
+          #{env["HTTP_USER_AGENT"]}
           <form action="/" method="post">
             Cookie 1: <input type="text" name="cookie_1" />
             Cookie 2: <input type="text" name="cookie_2" />
@@ -29,7 +30,7 @@ end
 Rack::CookieMonster.configure do |c|
   c.eat :cookie_1
   c.eat :cookie_2
-  c.share_with /mozilla/i
+  c.share_with /firefox/i
 end
 
 use Rack::CookieMonster
