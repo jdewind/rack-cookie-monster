@@ -79,7 +79,7 @@ describe Rack::CookieMonster do
       @environment["HTTP_COOKIE"] = "oatmeal_cookie=gross; peanutbutter_cookie=good"
       
       @app.expects(:call).with do |env|
-        env["HTTP_COOKIE"].should == "peanutbutter_cookie=good; chocolate_cookie=yummy; oatmeal_cookie=gross"        
+        env["HTTP_COOKIE"].should == "peanutbutter_cookie=good; chocolate_cookie=yummy; oatmeal_cookie=delicious"        
       end
       
       @target.call(@environment)

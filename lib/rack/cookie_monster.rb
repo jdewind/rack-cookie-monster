@@ -73,7 +73,7 @@ module Rack
       self.class.cookies.each do |cookie_name| 
         value = request.params[cookie_name.to_s]
         if value
-          cookies.delete(cookie_name)
+          cookies.delete(cookie_name.to_s)
           new_cookies[cookie_name.to_s] = value
         end
       end
