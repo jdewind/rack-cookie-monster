@@ -30,6 +30,7 @@ begin
     s.executables = []
     s.files =  FileList["lib/**/*.rb"]
     s.test_files = FileList["spec/**/*.rb"]
+    s.add_dependency "rack", ">=1.0.0"
   end
   
   Jeweler::GemcutterTasks.new
