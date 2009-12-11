@@ -10,6 +10,7 @@ The environment can be configured by using bundler.
 = Usage
 
 Rails Example:
+  # In rails Initializer
   Rack::CookieMonster.configure do |c|
     c.eat :_session_id
     c.eat :user_credentials
