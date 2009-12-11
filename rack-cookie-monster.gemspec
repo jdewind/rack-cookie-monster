@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A rack middleware library that allows cookies to be passed through forms}
   s.test_files = [
-    "spec/rack_cookie_monster_spec.rb",
+    "spec/rack/cookie_monster_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/stub_helpers.rb"
   ]
