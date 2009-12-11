@@ -54,7 +54,7 @@ describe Rack::CookieMonster do
       @target = subject.new(stub_instance(:app))
       @environment = {
         "HTTP_COOKIE" => "",
-        "QUERY_STRING" => "oatmeal_cookie=delicious&chocolate_cookie=yummy",
+        "QUERY_STRING" => "oatmeal_cookie=delicious&chocolate_cookie=yummy&burt=ernie&oats=honey",
         "REQUEST_METHOD" => "PUT"
       }
       
@@ -62,6 +62,8 @@ describe Rack::CookieMonster do
         c.eat :oatmeal_cookie
         c.eat :chocolate_cookie
       end
+      
+      @app.stubs(:call)
     end
     
     it "builds cookie string from environment params" do

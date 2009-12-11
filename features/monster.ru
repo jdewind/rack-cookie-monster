@@ -1,6 +1,9 @@
 class CookieMonsterApplication
   def call(env)
-    cookies = ::Rack::Request.new(env).cookies
+    request = ::Rack::Request.new(env)
+    cookies = request.cookies
+    params = request.params
+    
     res = ::Rack::Response.new
     res.write %{
       <html>
@@ -8,19 +11,28 @@ class CookieMonsterApplication
           <title>Form</title>
         </head>
         <body>
-          #{env["HTTP_USER_AGENT"]}
+          <p>#{env.inspect}</p>
           <form action="/" method="post">
             Cookie 1: <input type="text" name="cookie_1" />
             Cookie 2: <input type="text" name="cookie_2" />
             Non Cookie: <input type="text" name="non_cookie" />
             <input type="submit" value="Submit" />
           </form>
+          <div id="cookies">
+          #{
+            cookies.map do |k,v|
+              "<p>#{k} - #{v}</p>"
+            end.join("\n")
+          }
+          </div>
+          <div id="params">
+          #{
+            params.map do |k,v|
+              "<p>#{k} - #{v}</p>"
+            end.join("\n")        
+          }
+          </div>
         </body>
-        #{
-          cookies.map do |k,v|
-            "<p>#{k} - #{v}</p>"
-          end.join("\n")
-        }
       </html>
     }
     res.finish

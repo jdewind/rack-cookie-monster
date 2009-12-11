@@ -43,7 +43,7 @@ module Rack
     def call(env)
       shares_with(env["HTTP_USER_AGENT"]) do
         request = ::Rack::Request.new(env)
-        env["HTTP_COOKIE"] = build_cookie_string(request)
+        eat_cookies!(env, request)
       end
       @app.call(env)
     end
@@ -65,8 +65,9 @@ module Rack
       yield if any_matches
     end
   
-    def build_cookie_string(request)
-      cookies = request.cookies.dup
+    def eat_cookies!(env, request)
+      cookies = request.cookies
+      
       new_cookies = {}
       
       self.class.cookies.each do |cookie_name| 
@@ -78,7 +79,7 @@ module Rack
       end
       
       new_cookies.merge!(cookies)    
-      new_cookies.map do |k,v|
+      env["HTTP_COOKIE"] = new_cookies.map do |k,v|
         "#{k}=#{v}"
       end.compact.join("; ").freeze
     end

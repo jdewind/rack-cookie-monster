@@ -153,9 +153,6 @@ def assert_successful_response(allow_bad_response=false)
     $browser.goto location
     assert_successful_response
   elsif status != 200 and !allow_bad_response
-    tmpfilename = "#{Rails.root}/tmp/culerity-#{Process.pid}-#{Time.now.to_i}.html"
-    File.open(tmpfilename, "w"){|io| io << $browser.html}
-    `open -a /Applications/Safari.app #{tmpfilename}`
     raise "Browser returned Response Code #{$browser.page.web_response.status_code}"
   end
 end
