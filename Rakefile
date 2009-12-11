@@ -29,7 +29,7 @@ begin
     s.authors = ["Justin DeWind"]
     s.executables = []
     s.files =  FileList["lib/**/*.rb"]
-    s.test_files = FileList["spec/**/*.rb"]
+    s.test_files = FileList["spec/**/*.rb", "features/**/*"]
     s.add_dependency "rack", ">=1.0.0"
   end
   
