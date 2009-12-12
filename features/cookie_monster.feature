@@ -1,6 +1,6 @@
 Feature: Eats Cookies
 
-Scenario: Processed form elements and injects them into http cookies
+Scenario: Browser with user agent that cookie monster shares with
   Given I go to "/"
   And I fill in "Cookie 1" for the text field named "cookie_1"
   And I fill in "Cookie 2" for the text field named "cookie_2"
@@ -17,7 +17,7 @@ Scenario: Processed form elements and injects them into http cookies
     | name        | value       |
     | non_cookie  | Noncookie   |
   
-Scenario: Browser is not firefox
+Scenario: User agent does not match cookie monster's share list
   Given I change my browser to "ie"
   When I go to "/"
   And I fill in "Cookie 1" for the text field named "cookie_1"
@@ -33,4 +33,18 @@ Scenario: Browser is not firefox
     | non_cookie  | Noncookie   |
     | cookie_1    | Cookie 1    | 
     | cookie_2    | Cookie 2    |
+
+Scenario: Browser that has existing cookies for domain
+  Given My browser has the following cookies 
+    | name    | value   |
+    | session | secrets |
+    | creds   | street  |
+  When I go to "/"
+  And I fill in "Cookie 1" for the text field named "cookie_1"
+  And I press "Submit"
+  Then I should see "cookies" for
+    | name      | value     |
+    | cookie_1  | Cookie 1  |
+    | session   | secrets   |
+    | creds     | street    |
     

@@ -1,6 +1,6 @@
 here = File.expand_path(File.dirname(__FILE__))
 require File.join(here, "..", "vendor/gems/environment")
-$:<< File.join(here, "..", "lib")
+require File.join(here, "..", "init")
 
 require 'spec/autorun'
 require 'mocha'

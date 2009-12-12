@@ -67,7 +67,6 @@ module Rack
   
     def eat_cookies!(env, request)
       cookies = request.cookies
-      
       new_cookies = {}
       
       self.class.cookies.each do |cookie_name| 

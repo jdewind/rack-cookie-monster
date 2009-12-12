@@ -15,3 +15,9 @@ And %r{^I should( not)? see "([^"]+)" for$} do |not_see, container_id, table|
     end
   end
 end
+
+Given "My browser has the following cookies" do |table|
+  table.hashes.each do |h|
+    $browser.add_cookie("localhost", h["name"], h["value"])
+  end
+end
