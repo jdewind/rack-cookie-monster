@@ -5,19 +5,19 @@ module Rack
     
     class<<self
       def configure
-        @picnic ||= CookieMonsterConfig.new
-        yield(@picnic)
+        @config ||= CookieMonsterConfig.new
+        yield(@config)
         @configured = true
       end
     
       def snackers
         ensure_monster_configured!
-        @picnic.snackers
+        @config.snackers
       end
     
       def cookies
         ensure_monster_configured!
-        @picnic.cookies
+        @config.cookies
       end
       
       def configure_for_rails
