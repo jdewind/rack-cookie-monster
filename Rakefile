@@ -3,6 +3,11 @@ require 'cucumber/rake/task'
 
 task :default => [:spec, :features]
 
+desc "Executes bundler and grabs necessary dependencies to run tests"
+task "setup:contrib" do
+  system("gem bundle")
+end
+
 Spec::Rake::SpecTask.new do |t|
   t.spec_files = "spec/**/*_spec.rb"
   t.spec_opts = ["-f s -c"]

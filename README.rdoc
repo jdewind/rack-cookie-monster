@@ -1,15 +1,17 @@
 = Rack Cookie Monster
 
-A rack middleware library that allows for cookies to be passed through forms.
+A rack middleware library that allows for cookies to be passed through form parameters. Specifically, it merges the specified
+form parameters into the Cookie header of an http request. It gets around the problem of having a flash application which interacts with a web application that uses cookie based sessions.
 
 = Contributing
 The environment can be configured by using bundler.
 
-  gem bundle
+  gem bundle or rake setup:contrib
   
 = Usage
 
-Rails Example:
+<b>Rails Example:</b>
+
   # In rails initializer
   Rack::CookieMonster.configure do |c|
     c.eat :_session_id
@@ -20,7 +22,8 @@ Rails Example:
 
   Rack::CookieMonster.configure_for_rails
 
-Rack Example:
+<b>Rack Example:</b>
+
   class CookieMonsterApplication
     def call(env)
       cookies = ::Rack::Request.new(env).cookies
