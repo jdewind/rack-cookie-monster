@@ -52,10 +52,8 @@ The environment can be configured by using bundler.
     end
   end
 
-  Rack::CookieMonster.configure do |c|
-    c.eat :cookie_1
-    c.eat :cookie_2
-  end
-
-  use Rack::CookieMonster
+  use Rack::CookieMonster, {
+    :cookies => [:cookie_1, :cookie_2],
+    :share_with => /firefox/i
+  }
   run CookieMonsterApplication.new

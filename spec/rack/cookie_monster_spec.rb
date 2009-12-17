@@ -6,7 +6,6 @@ describe Rack::CookieMonster do
   subject { Class.new(described_class) }
   
   describe ".configure" do
-    
     it "specifies what cookies are to be eaten" do
       subject.configure do |c|
         c.eat :_session_id
@@ -124,6 +123,25 @@ describe Rack::CookieMonster do
         @environment["HTTP_USER_AGENT"] = "MSIE 6.0"
         @target.call(@environment.dup)
         @environment["HTTP_USER_AGENT"] = "MSIE"
+        @target.call(@environment.dup)
+      end      
+    end
+    
+    describe "configured through constructor" do
+      before do
+        @target = subject.new(@app, {
+          :cookies => [:oatmeal_cookie],
+          :share_with => ["Opera"]
+        })
+      end
+      
+      it "should overtake declarative configuration" do
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", "oatmeal_cookie=delicious")).once
+        @app.expects(:call).with(has_entry("HTTP_COOKIE", "")).once
+        
+        @environment["HTTP_USER_AGENT"] = "Opera"
+        @target.call(@environment.dup)
+        @environment["HTTP_USER_AGENT"] = "Boom"
         @target.call(@environment.dup)
       end      
     end

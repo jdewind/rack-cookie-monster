@@ -3,7 +3,7 @@ module Rack
     
     class Hungry < StandardError; end    
     
-    class<<self
+    class<<self      
       def configure
         @config ||= CookieMonsterConfig.new
         yield(@config)
@@ -36,8 +36,9 @@ module Rack
       
     end
     
-    def initialize(app)
+    def initialize(app, opts=nil)
       @app = app
+      @config = opts.nil? ? self.class : CookieMonsterConfig.new(opts)
     end
   
     def call(env)
@@ -51,9 +52,9 @@ module Rack
     private
   
     def shares_with(agent)
-      yield if self.class.snackers.empty?
+      yield if @config.snackers.empty?
     
-      any_matches = self.class.snackers.any? do |snacker|
+      any_matches = @config.snackers.any? do |snacker|
         case snacker
         when String
           snacker == agent
@@ -69,7 +70,7 @@ module Rack
       cookies = request.cookies
       new_cookies = {}
       
-      self.class.cookies.each do |cookie_name| 
+      @config.cookies.each do |cookie_name| 
         value = request.params[cookie_name.to_s]
         if value
           cookies.delete(cookie_name.to_s)
@@ -88,9 +89,9 @@ module Rack
   class CookieMonsterConfig
     attr_reader :cookies, :snackers
 
-    def initialize
-      @cookies = []
-      @snackers = []
+    def initialize(opts={})
+      @cookies = [opts[:cookies]].compact.flatten.map { |x| x.to_sym }
+      @snackers = [opts[:share_with]].compact.flatten
     end
 
     def eat(cookie)
