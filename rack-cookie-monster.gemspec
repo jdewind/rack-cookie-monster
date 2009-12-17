@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-cookie-monster}
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin DeWind"]
-  s.date = %q{2009-12-15}
+  s.date = %q{2009-12-16}
   s.description = %q{A rack middleware library that allows cookies to be passed through forms}
   s.email = %q{dewind@atomicobject.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A rack middleware library that allows cookies to be passed through forms}
   s.test_files = [
-    "spec/rack/cookie_monster_spec.rb",
+    "spec/rack/cookie_monster_config_spec.rb",
+     "spec/rack/cookie_monster_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/stub_helpers.rb",
      "features/cookie_monster.feature",
