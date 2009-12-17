@@ -1,7 +1,6 @@
 = Rack Cookie Monster
 
-A rack middleware library that allows for cookies to be passed through form parameters. Specifically, it merges the specified
-form parameters into the Cookie header of an http request. It gets around the problem of having a flash application which interacts with a web application that uses cookie based sessions.
+A rack middleware library that allows for cookies to be passed through form parameters. Specifically, it merges the specified form parameters into the Cookie header of an http request. It gets around the problem of having a flash application which interacts with a web application that uses cookie based sessions.
 
 = Contributing
 The environment can be configured by using bundler.

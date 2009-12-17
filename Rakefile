@@ -27,8 +27,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
     s.name = "rack-cookie-monster"
-    s.summary = "A rack middleware library that allows cookies to be passed through forms"
-    s.description = "A rack middleware library that allows cookies to be passed through forms"
+    s.summary = "A rack middleware library that allows cookies to be passed through forms parameters."
+    s.description = "A rack middleware library that allows for cookies to be passed through form parameters. Specifically, it merges the specified form parameters into the Cookie header of an http request. It gets around the problem of having a flash application which interacts with a web application that uses cookie based sessions."
     s.email = "dewind@atomicobject.com"
     s.homepage = "http://github.com/dewind/rack-cookie-monster"
     s.authors = ["Justin DeWind"]
