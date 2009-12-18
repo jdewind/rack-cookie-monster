@@ -33,7 +33,7 @@ begin
     s.homepage = "http://github.com/dewind/rack-cookie-monster"
     s.authors = ["Justin DeWind"]
     s.executables = []
-    s.files =  FileList["lib/**/*.rb"]
+    s.files =  FileList["lib/**/*.rb", "LICENSE", "Rakefile"]
     s.test_files = FileList["spec/**/*.rb", "features/**/*"]
     s.add_dependency "rack", ">=1.0.0"
   end
