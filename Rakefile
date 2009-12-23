@@ -1,3 +1,6 @@
+$:<< "vendor/gems/gems/rspec-1.2.9/lib" 
+$:<< "vendor/gems/gems/cucumber-0.4.4/lib"
+
 require 'spec/rake/spectask'
 require 'cucumber/rake/task'
 
@@ -15,7 +18,7 @@ end
 
 def setup_common_cucumber_settings(task)
   task.cucumber_opts = "--require features"
-  task.binary = 'bin/cucumber'
+  task.binary = 'vendor/gems/bin/cucumber'
 end
 
 Cucumber::Rake::Task.new(:features) do |t|    
