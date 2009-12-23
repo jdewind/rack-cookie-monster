@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin DeWind"]
-  s.date = %q{2009-12-18}
+  s.date = %q{2009-12-23}
   s.description = %q{A rack middleware library that allows for cookies to be passed through form parameters. Specifically, it merges the specified form parameters into the Cookie header of an http request. It gets around the problem of having a flash application which interacts with a web application that uses cookie based sessions.}
   s.email = %q{dewind@atomicobject.com}
   s.extra_rdoc_files = [
